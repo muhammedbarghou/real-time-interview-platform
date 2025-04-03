@@ -20,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${monaSans.variable}  antialiased`}
+        className={`${monaSans.variable}  antialiased pattern`}
+        data-new-gr-c-s-check-loaded="14.1229.0"
+        data-gr-ext-installed=""
       >
         {children}
       </body>

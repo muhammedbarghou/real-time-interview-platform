@@ -1,0 +1,52 @@
+import { Brain, Mic, ClipboardCheck, LineChart } from 'lucide-react';
+import SectionHeading from '@/components/common/SectionHeading';
+import FeatureCard from '@/components/common/FeatureCard';
+
+export default function FeaturesSection() {
+    const features = [
+        {
+            title: "AI-Powered Interview Questions",
+            description: "Our platform uses advanced AI to generate realistic interview questions tailored to your target job and industry.",
+            icon: <Brain className="h-6 w-6" />
+        },
+        {
+            title: "Voice Interaction",
+            description: "Practice speaking your answers out loud with our voice recognition technology for a more realistic interview experience.",
+            icon: <Mic className="h-6 w-6" />
+        },
+        {
+            title: "Real-time Feedback",
+            description: "Get immediate feedback on your responses, including content analysis, delivery suggestions, and improvement tips.",
+            icon: <ClipboardCheck className="h-6 w-6" />
+        },
+        {
+            title: "Progress Tracking",
+            description: "Monitor your improvement over time with detailed analytics on your performance across different interview types.",
+            icon: <LineChart className="h-6 w-6" />
+        }
+    ];
+
+    return (
+        <section id="features" className="py-24 flex justify-center items-center">
+            <div className="container px-4 md:px-6">
+                <SectionHeading
+                    subheading="Features"
+                    heading="Everything you need to ace your interviews"
+                    description="Our platform provides comprehensive tools to help you prepare for any interview scenario."
+                    center={true}
+                />
+
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {features.map((feature, index) => (
+                        <FeatureCard
+                            key={index}
+                            title={feature.title}
+                            description={feature.description}
+                            icon={feature.icon}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
