@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
-import { Github } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/Firebase/client";
+import { signIn } from "@/lib/actions/auth.action";
 
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -37,6 +39,21 @@ export function LoginForm({
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
     try {
+      const { email, password } = values;
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const idToken = await userCredentials.user.getIdToken();
+      if (!idToken) {
+        toast.error("Login failed");
+        return;
+      }
+      await signIn({
+        email,
+        idToken,
+      });
       toast.success("Sign in successful");
       router.push("/home");
     } catch (error) {
@@ -107,7 +124,6 @@ export function LoginForm({
           </span>
         </div>
         <Button variant="outline" className="w-full" type="button">
-          <Github className="mr-2 h-4 w-4" />
           Login with GitHub
         </Button>
       </div>

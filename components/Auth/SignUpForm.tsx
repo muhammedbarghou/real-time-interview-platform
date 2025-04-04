@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
-import { Github } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { createUserWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
+import { auth } from "@/Firebase/client";
+import { signUp } from "@/lib/actions/auth.action";
 
 const formSchema = z.object({
   username: z
@@ -52,8 +54,44 @@ export function SignUpForm({
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
     try {
-      toast.success("Signup successful");
-      router.push("/sign-in");
+      const { username, email, password } = values;
+
+      try {
+        const userCredentials = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+
+        const result = await signUp({
+          uid: userCredentials.user.uid,
+          name: username,
+          email,
+          password,
+        });
+
+        if (!result.success) {
+          toast.error(result.message);
+          return;
+        }
+
+        toast.success("Signup successful");
+        router.push("/sign-in");
+      } catch (error: any) {
+        if (error.code === "auth/email-already-in-use") {
+          // Handle the specific case where email is already in use
+          form.setError("email", {
+            type: "manual",
+            message:
+              "This email is already registered. Please use a different email or try logging in.",
+          });
+          toast.error("Email address already in use");
+        } else {
+          // Handle other Firebase auth errors
+          console.error("Firebase auth error:", error);
+          toast.error(error.message || "Signup failed");
+        }
+      }
     } catch (error) {
       console.error("Signup failed:", error);
       toast.error("Signup failed");
@@ -133,7 +171,6 @@ export function SignUpForm({
           </span>
         </div>
         <Button variant="outline" className="w-full" type="button">
-          <Github className="mr-2 h-4 w-4" />
           Sign up with GitHub
         </Button>
       </div>

@@ -4,8 +4,13 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import { Brain } from "lucide-react";
 import * as React from "react";
+import { isAuthenticated } from "@/lib/actions/auth.action";
+import { redirect } from "next/navigation";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default async function Layout({ children }: { children: ReactNode }) {
+  const isUserAuthenticated = await isAuthenticated();
+  if (!isUserAuthenticated) redirect("/sign-in");
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen">
