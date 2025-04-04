@@ -157,7 +157,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <div></div>
+        <NavUser user={data.user} />
       </SidebarHeader>
       <SidebarContent></SidebarContent>
       <SidebarFooter>
