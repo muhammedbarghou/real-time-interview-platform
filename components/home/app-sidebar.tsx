@@ -8,7 +8,6 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-  SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import {
   AudioWaveform,
@@ -21,7 +20,6 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-  LogOut,
 } from "lucide-react";
 
 const data = {

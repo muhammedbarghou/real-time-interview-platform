@@ -12,7 +12,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
   if (!isUserAuthenticated) redirect("/sign-in");
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false} className={"bg-dark-100"}>
       <div className="flex min-h-screen">
         <AppSidebar />
         <main className="flex-1 flex flex-col">
