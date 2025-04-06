@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { vapi } from "@/lib/vap.sdk";
-import { getCurrentUser } from "@/lib/actions/auth.action";
+import UserAvatar from "@/components/common/UserAvatar";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -69,7 +69,7 @@ function Agent({ userName, userId, type }: AgentProps) {
     if (callStatus === CallStatus.FINISHED) {
       router.push("/home");
     }
-  }, [callStatus, messages, type, userId]);
+  }, [callStatus, messages, router, type, userId]);
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
     await vapi.start(process.env.NEXT_PUBLIC_VAP_WORKFLOW_ID!, {
@@ -105,15 +105,15 @@ function Agent({ userName, userId, type }: AgentProps) {
         </div>
         <div className={"card-border"}>
           <div className={"card-content"}>
-            {/*<UserAvatar*/}
-            {/*  name={userName}*/}
+            {/*<Image*/}
+            {/*  src={"/user-avatar.png"}*/}
+            {/*  alt={"avatar"}*/}
+            {/*  width={540}*/}
+            {/*  height={540}*/}
             {/*  className={"rounded-full object-cover size-[120px]"}*/}
             {/*/>*/}
-            <Image
-              src={"/user-avatar.png"}
-              alt={"avatar"}
-              width={540}
-              height={540}
+            <UserAvatar
+              name={userName}
               className={"rounded-full object-cover size-[120px]"}
             />
             <h3>{userName}</h3>
