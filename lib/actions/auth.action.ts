@@ -1,7 +1,6 @@
 "use server";
 
-// @ts-expect-error
-import { auth, db } from "@/firebase/admin";
+import { auth, db } from "@/Firebase/admin";
 import { cookies } from "next/headers";
 
 const SESSION_DURATION = 60 * 60 * 24 * 7;
