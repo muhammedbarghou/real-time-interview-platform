@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vap.sdk";
 import { interviewer } from "@/constants";
 import { createFeedback } from "@/lib/actions/general.action";
+import UserAvatar from "@/components/common/UserAvatar";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -165,11 +166,15 @@ const Agent = ({
         {/* User Profile Card */}
         <div className="card-border">
           <div className="card-content">
-            <Image
-              src="/user-avatar.png"
-              alt="profile-image"
-              width={539}
-              height={539}
+            {/*<Image*/}
+            {/*  src="/user-avatar.png"*/}
+            {/*  alt="profile-image"*/}
+            {/*  width={539}*/}
+            {/*  height={539}*/}
+            {/*  className="rounded-full object-cover size-[120px]"*/}
+            {/*/>*/}
+            <UserAvatar
+              name={userName}
               className="rounded-full object-cover size-[120px]"
             />
             <h3>{userName}</h3>
