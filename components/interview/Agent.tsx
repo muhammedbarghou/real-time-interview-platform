@@ -166,16 +166,9 @@ const Agent = ({
         {/* User Profile Card */}
         <div className="card-border">
           <div className="card-content">
-            {/*<Image*/}
-            {/*  src="/user-avatar.png"*/}
-            {/*  alt="profile-image"*/}
-            {/*  width={539}*/}
-            {/*  height={539}*/}
-            {/*  className="rounded-full object-cover size-[120px]"*/}
-            {/*/>*/}
             <UserAvatar
               name={userName}
-              className="rounded-full object-cover size-[120px]"
+              className="rounded-full object-cover size-[120px] text-3xl"
             />
             <h3>{userName}</h3>
           </div>
@@ -198,7 +191,7 @@ const Agent = ({
         </div>
       )}
 
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center mt-5">
         {callStatus !== "ACTIVE" ? (
           <button className="relative btn-call" onClick={() => handleCall()}>
             <span

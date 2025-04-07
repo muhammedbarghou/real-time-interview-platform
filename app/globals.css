@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-success-100: #9ef01a;
+  --color-success-100: #40916c;
   --color-success-200: #38b000;
   --color-destructive-100: #d00000;
   --color-destructive-200: #9d0208;
@@ -24,6 +24,7 @@
   --font-mona-sans: "Mona Sans", sans-serif;
 
   --bg-pattern: url("/pattern.png");
+  --bg-pattern-light: ;
 }
 
 :root {

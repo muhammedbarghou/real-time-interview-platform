@@ -5,7 +5,7 @@ async function Page() {
   const user = await getCurrentUser();
   return (
     <div>
-      <h3>Interview agent</h3>
+      <h3 className={"mb-10"}>Interview agent</h3>
       <Agent userName={user?.name} userId={user?.id} type={"generate"} />
     </div>
   );
